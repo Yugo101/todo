@@ -18,6 +18,9 @@
         <tr th:each="task : ${tasks}">
             <td th:text="${task.title}"></td>
             <td th:text="${task.completed}"></td>
+            <form th:action="@{/tasks/{id}/delete(id=${task.id})}"  method="post">
+                <button type="submit">削除</button>
+            </form>
         </tr>
         </tbody>
     </table>

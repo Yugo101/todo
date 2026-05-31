@@ -16,11 +16,18 @@ public class TaskService {
         this.taskRepository = taskRepository;
     }
 
+    //タスク全件取得
     public List<Task> taskFindAll() {
         return taskRepository.findAll();
     }
 
+     //タスク作成
     public void createTask(Task task) {
         taskRepository.save(task);
+    }
+
+    //タスク削除
+    public void deleteTask(long id) {
+        taskRepository.deleteById(id);
     }
 }
