@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -36,6 +37,13 @@ public class TaskController {
     @PostMapping("/tasks")
     public String createTask(@ModelAttribute Task task) {
         taskService.createTask(task);
+        return "redirect:/tasks";
+    }
+
+    //タスクの削除
+    @PostMapping("/tasks/{id}/delete")
+    public String deleteTask(@PathVariable Long id) {
+        taskService.deleteTask(id);
         return "redirect:/tasks";
     }
 }
