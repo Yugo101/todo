@@ -1,6 +1,7 @@
 package com.example.todo.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import com.example.todo.entity.Task;
 import com.example.todo.repository.TaskRepository;
@@ -21,7 +22,7 @@ public class TaskService {
         return taskRepository.findAll();
     }
 
-     //タスク作成
+    //タスク作成
     public void createTask(Task task) {
         taskRepository.save(task);
     }
@@ -29,5 +30,14 @@ public class TaskService {
     //タスク削除
     public void deleteTask(long id) {
         taskRepository.deleteById(id);
+    }
+
+    //タスク完了
+    public void completeTask(Long id) {
+        Task task = taskRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("タスクが見つかりません"));
+
+        task.setCompleted(true);
+        taskRepository.save(task);
     }
 }
