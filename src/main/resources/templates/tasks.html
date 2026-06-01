@@ -21,6 +21,9 @@
             <form th:action="@{/tasks/{id}/delete(id=${task.id})}"  method="post">
                 <button type="submit">削除</button>
             </form>
+            <form th:action="@{/tasks/{id}/complete(id=${task.id})}" method="post">
+                <button type="submit">完了</button>
+            </form>
         </tr>
         </tbody>
     </table>
