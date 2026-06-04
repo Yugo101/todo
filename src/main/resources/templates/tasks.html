@@ -18,12 +18,13 @@
         <tr th:each="task : ${tasks}">
             <td th:text="${task.title}"></td>
             <td th:text="${task.completed}"></td>
-            <form th:action="@{/tasks/{id}/delete(id=${task.id})}"  method="post">
+            <form th:action="@{/tasks/{id}/delete(id=${task.id})}" method="post">
                 <button type="submit">削除</button>
             </form>
             <form th:action="@{/tasks/{id}/complete(id=${task.id})}" method="post">
                 <button type="submit">完了</button>
             </form>
+            <a th:href="@{/tasks/{id}/edit(id=${task.id})}">編集</a>
         </tr>
         </tbody>
     </table>
