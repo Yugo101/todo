@@ -26,6 +26,14 @@ public class TaskController {
         return "tasks";
     }
 
+    //タスク編集画面の表示
+    @GetMapping("/tasks/{id}/edit")
+    public String editTask(@PathVariable Long id, Model model) {
+        Task task = taskService.findById(id);
+        model.addAttribute("task", task);
+        return "task-edit";
+    }
+
     //タスク作成画面の表示
     @GetMapping("/tasks/new")
     public String newTask(Model model) {
@@ -37,6 +45,13 @@ public class TaskController {
     @PostMapping("/tasks")
     public String createTask(@ModelAttribute Task task) {
         taskService.createTask(task);
+        return "redirect:/tasks";
+    }
+
+    //タスクの更新
+    @PostMapping("/tasks/{id}/edit")
+    public String updateTask(@PathVariable Long id, @ModelAttribute Task task) {
+        taskService.updateTask(id, task);
         return "redirect:/tasks";
     }
 

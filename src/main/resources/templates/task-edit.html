@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>タスク編集</title>
+</head>
+<body>
+<a href="/tasks">タスク一覧</a>
+<h2>タスク編集</h2>
+<form th:action="@{/tasks/{id}/edit(id=${task.id})}" th:object="${task}" method="post">
+    <input type="text" th:field="*{title}"/>
+    <button type="submit">送信</button>
+</form>
+</body>
+</html>
