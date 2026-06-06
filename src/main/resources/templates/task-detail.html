@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>タスク詳細</title>
+</head>
+<body>
+<h2>タスク詳細</h2>
+<p th:text="${task.title}"></p>
+<p th:text="${task.completed}"></p>
+<a th:href="@{/tasks}">タスク一覧</a>
+<a th:href="@{/tasks/{id}/edit(id=${task.id})}">編集</a>
+</body>
+</html>

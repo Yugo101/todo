@@ -25,6 +25,7 @@
                 <button type="submit">完了</button>
             </form>
             <a th:href="@{/tasks/{id}/edit(id=${task.id})}">編集</a>
+            <a th:href="@{/tasks/{id}(id=${task.id})}">詳細</a>
         </tr>
         </tbody>
     </table>
