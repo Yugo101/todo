@@ -34,6 +34,14 @@ public class TaskController {
         return "task-edit";
     }
 
+    //タスク詳細画面の表示
+    @GetMapping("/tasks/{id}")
+    public String detailTask(@PathVariable Long id, Model model){
+        Task task = taskService.findById(id);
+        model.addAttribute("task", task);
+        return "task-detail";
+    }
+
     //タスク作成画面の表示
     @GetMapping("/tasks/new")
     public String newTask(Model model) {
