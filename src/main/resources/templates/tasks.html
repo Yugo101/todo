@@ -7,6 +7,7 @@
 <body>
 <div class="tasklist">
     <h2>タスク一覧</h2>
+    <a href="/tasks/new">タスク作成</a>
     <table>
         <thead>
         <tr>
@@ -18,16 +19,20 @@
         <tbody>
         <tr th:each="task : ${tasks}">
             <td th:text="${task.title}"></td>
-            <td th:text="${task.priority}"></td>
+            <td th:text="${task.priority.label}"></td>
             <td th:text="${task.completed}"></td>
+            <td>
             <form th:action="@{/tasks/{id}/delete(id=${task.id})}" method="post">
                 <button type="submit">削除</button>
             </form>
+            </td>
+            <td>
             <form th:action="@{/tasks/{id}/complete(id=${task.id})}" method="post">
                 <button type="submit">完了</button>
             </form>
-            <a th:href="@{/tasks/{id}/edit(id=${task.id})}">編集</a>
-            <a th:href="@{/tasks/{id}(id=${task.id})}">詳細</a>
+            </td>
+            <td><a th:href="@{/tasks/{id}/edit(id=${task.id})}">編集</a></td>
+            <td><a th:href="@{/tasks/{id}(id=${task.id})}">詳細</a></td>
         </tr>
         </tbody>
     </table>

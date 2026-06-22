@@ -6,14 +6,14 @@
 </head>
 <body>
 <a href="/tasks">タスク一覧</a>
-<h2>タスク作成</h2><!DOCTYPE html>
+<h2>タスク作成</h2>
 <form th:action="@{/tasks}" th:object="${task}" method="post">
     <input type="text" th:field="*{title}"/>
 
     <select th:field="*{priority}">
         <option th:each="p : ${T(com.example.todo.entity.Priority).values()}"
                 th:value="${p}"
-                th:text="${p}" >
+                th:text="${p.label}" >
         </option>
     </select>
 
