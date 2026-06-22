@@ -9,6 +9,13 @@
 <h2>タスク編集</h2>
 <form th:action="@{/tasks/{id}/edit(id=${task.id})}" th:object="${task}" method="post">
     <input type="text" th:field="*{title}"/>
+
+    <select th:field="*{priority}">
+        <option th:each="p:${T(com.example.todo.entity.Priority).values()}"
+                th:value="${p}"
+                th:text="${p}">
+        </option>
+    </select>
     <button type="submit">送信</button>
 </form>
 </body>
