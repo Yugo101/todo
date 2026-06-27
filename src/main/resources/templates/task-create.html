@@ -1,23 +1,44 @@
 <!DOCTYPE html>
-<html lang="en"  xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>タスク作成</title>
 </head>
 <body>
-<a href="/tasks">タスク一覧</a>
 <h2>タスク作成</h2>
+<a href="/tasks">タスク一覧</a>
 <form th:action="@{/tasks}" th:object="${task}" method="post">
-    <input type="text" th:field="*{title}"/>
-
-    <select th:field="*{priority}">
-        <option th:each="p : ${T(com.example.todo.entity.Priority).values()}"
-                th:value="${p}"
-                th:text="${p.label}" >
-        </option>
-    </select>
-
-    <button type="submit">送信</button>
+    <table>
+        <thead>
+        <tr>
+            <th>タイトル</th>
+            <th>優先度</th>
+            <th>カテゴリー</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td><input type="text" th:field="*{title}"/></td>
+            <td>
+                <select th:field="*{priority}">
+                    <option th:each="p : ${T(com.example.todo.entity.Priority).values()}"
+                            th:value="${p}"
+                            th:text="${p.label}">
+                    </option>
+                </select>
+            </td>
+            <td>
+                <select th:field="*{category}">
+                    <option th:each="c : ${T(com.example.todo.entity.Category).values()}"
+                            th:value="${c}"
+                            th:text="${c.label}">
+                    </option>
+                </select>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <div><button type="submit">送信</button></div>
 </form>
 </body>
 </html>

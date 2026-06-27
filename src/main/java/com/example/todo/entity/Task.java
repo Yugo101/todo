@@ -22,4 +22,7 @@ public class Task {
 
     @Enumerated(EnumType.STRING)
     private Priority priority;
+
+    @Enumerated(EnumType.STRING)
+    private Category category;
 }
