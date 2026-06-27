@@ -39,6 +39,7 @@ public class TaskService {
                 .orElseThrow(() -> new RuntimeException("タスクが見つかりません"));
         task.setTitle(updatedTask.getTitle());
         task.setPriority(updatedTask.getPriority());
+        task.setCategory(updatedTask.getCategory());
         taskRepository.save(task);
     }
 

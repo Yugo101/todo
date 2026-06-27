@@ -6,10 +6,28 @@
 </head>
 <body>
 <h2>タスク詳細</h2>
-<p th:text="${task.title}"></p>
-<p th:text="${task.completed}"></p>
-<p th:text="${task.priority.label}"></p>
+<a href="/tasks/new">タスク作成</a>
 <a th:href="@{/tasks}">タスク一覧</a>
-<a th:href="@{/tasks/{id}/edit(id=${task.id})}">編集</a>
+<table>
+    <thead>
+    <tr>
+        <th>タイトル</th>
+        <th>優先度</th>
+        <th>カテゴリー</th>
+        <th>完了</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td th:text="${task.title}"></td>
+        <td th:text="${task.priority.label}"></td>
+        <td th:text="${task.category.label}"></td>
+        <td th:text="${task.completed}"></td>
+        <td>
+            <a th:href="@{/tasks/{id}/edit(id=${task.id})}">タスク編集</a>
+        </td>
+    </tr>
+    </tbody>
+</table>
 </body>
 </html>
