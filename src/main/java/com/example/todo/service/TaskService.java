@@ -40,6 +40,7 @@ public class TaskService {
         task.setTitle(updatedTask.getTitle());
         task.setPriority(updatedTask.getPriority());
         task.setCategory(updatedTask.getCategory());
+        task.setDeadline(updatedTask.getDeadline());
         taskRepository.save(task);
     }
 
