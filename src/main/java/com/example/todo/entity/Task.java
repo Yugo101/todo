@@ -10,6 +10,8 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 
+import java.time.LocalDate;
+
 @Entity
 @Getter
 @Setter
@@ -25,4 +27,6 @@ public class Task {
 
     @Enumerated(EnumType.STRING)
     private Category category;
+
+    private LocalDate deadline;
 }
