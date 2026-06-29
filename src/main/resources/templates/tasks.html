@@ -8,6 +8,16 @@
 <div class="tasklist">
     <h2>タスク一覧</h2>
     <a href="/tasks/new">タスク作成</a>
+    <form th:action="@{/tasks}" method="get">
+        <select name="category" onchange="this.form.submit()">
+            <option value="">全て</option>
+            <option th:each="c : ${T(com.example.todo.entity.Category).values()}"
+                    th:value="${c}"
+                    th:text="${c.label}">
+
+            </option>
+        </select>
+    </form>
     <table>
         <thead>
         <tr>
