@@ -1,14 +1,12 @@
 package com.example.todo.controller;
 
+import com.example.todo.entity.Category;
 import com.example.todo.service.TaskService;
 import com.example.todo.entity.Task;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class TaskController {
@@ -19,10 +17,14 @@ public class TaskController {
         this.taskService = taskService;
     }
 
-    //タスクの一覧表示
+    //タスクの表示
     @GetMapping("/tasks")
-    public String tasks(Model model) {
-        model.addAttribute("tasks", taskService.taskFindAll());
+    public String tasks(@RequestParam(required = false)Category category, Model model) {
+        if(category == null) {
+            model.addAttribute("tasks", taskService.taskFindAll());
+        }else {
+            model.addAttribute("tasks", taskService.findByCategory(category));
+        }
         return "tasks";
     }
 

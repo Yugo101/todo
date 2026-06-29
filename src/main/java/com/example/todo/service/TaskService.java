@@ -2,6 +2,7 @@ package com.example.todo.service;
 
 import java.util.List;
 
+import com.example.todo.entity.Category;
 import com.example.todo.entity.Task;
 import com.example.todo.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -56,5 +57,10 @@ public class TaskService {
 
         task.setCompleted(true);
         taskRepository.save(task);
+    }
+
+    //カテゴリーフィルタリング
+    public List<Task> findByCategory(Category category) {
+        return taskRepository.findByCategory(category);
     }
 }
