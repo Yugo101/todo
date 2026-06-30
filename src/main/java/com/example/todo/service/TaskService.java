@@ -3,6 +3,7 @@ package com.example.todo.service;
 import java.util.List;
 
 import com.example.todo.entity.Category;
+import com.example.todo.entity.Priority;
 import com.example.todo.entity.Task;
 import com.example.todo.repository.TaskRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -62,5 +63,15 @@ public class TaskService {
     //カテゴリーフィルタリング
     public List<Task> findByCategory(Category category) {
         return taskRepository.findByCategory(category);
+    }
+
+    //優先度フィルタリング
+    public List<Task> findByPriority(Priority priority) {
+        return taskRepository.findByPriority(priority);
+    }
+
+    //カテゴリー、優先度フィルタリング
+    public List<Task> findByCategoryAndPriority(Category category, Priority priority) {
+        return taskRepository.findByCategoryAndPriority(category, priority);
     }
 }

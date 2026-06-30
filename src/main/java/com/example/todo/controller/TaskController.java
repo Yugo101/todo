@@ -1,6 +1,7 @@
 package com.example.todo.controller;
 
 import com.example.todo.entity.Category;
+import com.example.todo.entity.Priority;
 import com.example.todo.service.TaskService;
 import com.example.todo.entity.Task;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +20,15 @@ public class TaskController {
 
     //タスクの表示
     @GetMapping("/tasks")
-    public String tasks(@RequestParam(required = false)Category category, Model model) {
-        if(category == null) {
+    public String tasks(@RequestParam(required = false) Category category,@RequestParam(required = false) Priority priority, Model model) {
+        if (category == null && priority == null) {
             model.addAttribute("tasks", taskService.taskFindAll());
-        }else {
+        } else if(category != null && priority == null){
             model.addAttribute("tasks", taskService.findByCategory(category));
+        }else if (category == null && priority != null) {
+            model.addAttribute("tasks", taskService.findByPriority(priority));
+        } else if(category != null && priority != null){
+            model.addAttribute("tasks", taskService.findByCategoryAndPriority(category, priority));
         }
         return "tasks";
     }
@@ -38,7 +43,7 @@ public class TaskController {
 
     //タスク詳細画面の表示
     @GetMapping("/tasks/{id}")
-    public String detailTask(@PathVariable Long id, Model model){
+    public String detailTask(@PathVariable Long id, Model model) {
         Task task = taskService.findById(id);
         model.addAttribute("task", task);
         return "task-detail";
