@@ -9,6 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Comparator;
+import java.util.List;
+
 @Controller
 public class TaskController {
     private final TaskService taskService;
@@ -20,16 +23,34 @@ public class TaskController {
 
     //タスクの表示
     @GetMapping("/tasks")
-    public String tasks(@RequestParam(required = false) Category category,@RequestParam(required = false) Priority priority, Model model) {
+    public String tasks(
+            @RequestParam(required = false) Category category,
+            @RequestParam(required = false) Priority priority,
+            @RequestParam(required = false) String sort,
+            Model model) {
+
+        List<Task> tasks;
+
         if (category == null && priority == null) {
-            model.addAttribute("tasks", taskService.taskFindAll());
-        } else if(category != null && priority == null){
-            model.addAttribute("tasks", taskService.findByCategory(category));
-        }else if (category == null && priority != null) {
-            model.addAttribute("tasks", taskService.findByPriority(priority));
-        } else if(category != null && priority != null){
-            model.addAttribute("tasks", taskService.findByCategoryAndPriority(category, priority));
+            tasks = taskService.taskFindAll();
+        } else if (category != null && priority == null) {
+           tasks = taskService.findByCategory(category);
+        } else if (category == null && priority != null) {
+           tasks = taskService.findByPriority(priority);
+        } else {
+            tasks = taskService.findByCategoryAndPriority(category, priority);
         }
+
+        if ("deadline".equals(sort)) {
+            tasks.sort(Comparator.comparing(Task::getDeadline,
+                    Comparator.nullsLast(Comparator.naturalOrder())));
+        }
+
+        model.addAttribute("tasks", tasks);
+        model.addAttribute("selectedCategory", category);
+        model.addAttribute("selectedPriority", priority);
+        model.addAttribute("selectedSort", sort);
+
         return "tasks";
     }
 

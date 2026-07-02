@@ -13,7 +13,8 @@
             <option value="">全て</option>
             <option th:each="p : ${T(com.example.todo.entity.Priority).values()}"
                     th:value="${p}"
-                    th:text="${p.label}">
+                    th:text="${p.label}"
+                    th:selected="${p == selectedPriority}">
             </option>
         </select>
 
@@ -21,9 +22,11 @@
             <option value="">全て</option>
             <option th:each="c : ${T(com.example.todo.entity.Category).values()}"
                     th:value="${c}"
-                    th:text="${c.label}">
+                    th:text="${c.label}"
+                    th:selected="${c == selectedCategory}">
             </option>
         </select>
+        <button type="submit" name="sort" value="deadline">期限順</button>
         <button type="submit">絞り込み</button>
     </form>
     <table>
