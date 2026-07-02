@@ -74,4 +74,14 @@ public class TaskService {
     public List<Task> findByCategoryAndPriority(Category category, Priority priority) {
         return taskRepository.findByCategoryAndPriority(category, priority);
     }
+
+    //昇順ソート
+    public List<Task> findAllByOrderByDeadlineAsc() {
+        return taskRepository.findAllByOrderByDeadlineAsc();
+    }
+
+    //降順ソート
+    public List<Task> findAllByOrderByDeadlineDesc() {
+        return taskRepository.findAllByOrderByDeadlineDesc();
+    }
 }
